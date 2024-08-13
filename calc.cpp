@@ -1,64 +1,52 @@
 #include <iostream>
-#include <string>
 
-using std::string;
-using std::cout;
-using std::endl;
+using std::string, std::cout, std::endl, std::cerr;
 
 class Calc {
 public:
 
-    float n1;
-    float n2;
-    string op;
+    double n1;
+    double n2;
+    char op;
 
-    Calc(float numb1, string oper, float numb2): n1(numb1), op(oper), n2(numb2) {}
+    Calc(double numb1, char oper, double numb2): n1(numb1), op(oper), n2(numb2) {}
 
-    float Operations() {
-        float result;
+    double Operations() {
+        double result;
 
-        if (op == "+") {
+        switch (op) {
+            case '+':
+                result = n1 + n2;
+                return result;
+                break;
 
-            result = n1 + n2;
+            case '-':
+                result = n1 - n2;
+                return result;
+                break;
 
-        } else if (op == "-") {
+            case '*':
+                result = n1 * n2;
+                return result;
+                break;
 
-            result = n1 - n2;
-
-        } else if (op == "*") {
-
-            result = n1 * n2;
-
-        } else if (op == "/") {
-
-            if (n2 == 0)
-            {
-
-                std::cerr << "Erro: Zero division." << std::endl;
-
-            } else {
-
+            case '/':
                 result = n1 / n2;
+                return result;
+                break;
 
-            }
-
-        } else
-        {
-            std::cerr << "Invalide Operation." << std::endl;
-            result = 0; // Ou algum valor de erro apropriado
+            default:
+                cerr << "Invalide Operation." << std::endl;
+                break;
         }
-        
-        
-        return result;
-
     }
 };
 
-int main() {
+int main(int argc, char *argv[]) {
 
-    Calc math(5, "/", 0);
+    Calc math(2, '+', 2);
 
-    float result = math.Operations();
+    double result = math.Operations();
 
     cout << result << endl;
 
